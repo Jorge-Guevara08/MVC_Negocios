@@ -1,56 +1,55 @@
-<h1>Gestión de Marcas</h1>
-<section class="WWFilter">
+<h1>{{modedsc}}</h1>
+<section class="row">
+  <form action="index.php?page=Mnt_Marca&mode={{mode}}&idmarca={{idmarca}}" method="POST" class="col-6 col-3-offset">
+    <section class="row">
+      <label for="idmarca" class="col-4">Código</label>
+      <input type="hidden" id="idmarca" name="idmarca" value="{{idmarca}}" />
+      <input type="hidden" id="mode" name="mode" value="{{mode}}" />
+      <input type="hidden" name="xssToken" value="{{xssToken}}" />
+      <input type="text" readonly name="idmarcadummy" value="{{idmarca}}" />
+    </section>
+    <section class="row">
+      <label for="marca_nom" class="col-4">Marca</label>
+      <input type="text" {{readonly}} name="marca_nom" value="{{marca_nom}}" maxlength="45"
+        placeholder="Nombre de Marca" />
+      {{if marca_nom_error}}
+      <span class="error col-12">{{marca_nom_error}}</span>
+      {{endif marca_nom_error}}
+    </section>
+    <section class="row">
+      <label for="marca_descripciont" class="col-4">Descripcion</label>
+      <input type="text" {{readonly}} name="marca_descripcion" value="{{marca_descripcion}}" maxlength="45"
+        placeholder="Descripcion de Marca" />
+      {{if marca_nom_error}}
+      <span class="error col-12">{{marca_nom_error}}</span>
+      {{endif marca_nom_error}}
+      </select>
+    </section>
+    {{if has_errors}}
+    <section>
+      <ul>
+        {{foreach general_errors}}
+        <li>{{this}}</li>
+        {{endfor general_errors}}
+      </ul>
+    </section>
+    {{endif has_errors}}
+    <section>
+      {{if show_action}}
+      <button type="submit" name="btnGuardar" value="G">Guardar</button>
+      {{endif show_action}}
+      <button type="button" id="btnCancelar">Cancelar</button>
+    </section>
+  </form>
+</section>
 
-</section>
-<section class="WWList">
-  <table>
-    <thead>
-      <tr>
-        <th>Código</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>
-          {{if new_enabled}}
-          <button id="btnAdd">Nuevo</button>
-          {{endif new_enabled}}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {{foreach marca}}
-      <tr>
-        <td>{{idmarca}}</td>
-        <td><a href="index.php?page=mnt_marca&mode=DSP&idmarca={{idmarca}}">{{marca_nom}}</a></td>
-        <td>{{marca_descripcion}}</td>
-        <td>
-          {{if ~edit_enabled}}
-          <form action="index.php" method="get">
-             <input type="hidden" name="page" value="mnt_marca"/>
-              <input type="hidden" name="mode" value="UPD" />
-              <input type="hidden" name="catid" value={{idmarca}} />
-              <button type="submit">Editar</button>
-          </form>
-          {{endif ~edit_enabled}}
-          {{if ~delete_enabled}}
-          <form action="index.php" method="get">
-             <input type="hidden" name="page" value="mnt_marca"/>
-              <input type="hidden" name="mode" value="DEL" />
-              <input type="hidden" name="catid" value={{idmarca}} />
-              <button type="submit">Eliminar</button>
-          </form>
-          {{endif ~delete_enabled}}
-        </td>
-      </tr>
-      {{endfor marca}}
-    </tbody>
-  </table>
-</section>
+
 <script>
-   document.addEventListener("DOMContentLoaded", function () {
-      document.getElementById("btnAdd").addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        window.location.assign("index.php?page=mnt_marca&mode=INS&idmarca=0");
-      });
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("btnCancelar").addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.location.assign("index.php?page=Mnt_marcas");
     });
+  });
 </script>
