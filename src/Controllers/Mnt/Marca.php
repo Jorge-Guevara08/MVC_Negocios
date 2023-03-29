@@ -93,13 +93,13 @@ class Marca extends PublicController{
         } else {
             throw new Exception("Invalid Xss Token");
         }
-        if(isset($_POST["catnom"])){
+        if(isset($_POST["marca_nom"])){
             if(\Utilities\Validators::IsEmpty($_POST["marca_nom"])){
                 $this->viewData["has_errors"] = true;
                 $this->viewData["marca_nom_error"] = "El nombre no puede ir vacío!";
             }
         } else {
-            throw new Exception("CatNom not present in form");
+            throw new Exception("Nombre Marca not present in form");
         }
         if(isset($_POST["mode"])){
             if(!key_exists($_POST["mode"], $this->modes)){
@@ -113,10 +113,10 @@ class Marca extends PublicController{
         }
         if(isset($_POST["idmarca"])){
             if(($this->viewData["mode"] !== "INS" && intval($_POST["idmarca"])<=0)){
-                throw new Exception("catId is not Valid");
+                throw new Exception("Marca ID is not Valid");
             }
             if($this->viewData["idmarca"]!== intval($_POST["idmarca"])){
-                throw new Exception("catid value is different from query");
+                throw new Exception("Marca ID value is different from query");
             }
         }else {
             throw new Exception("idmarca not present in form");
